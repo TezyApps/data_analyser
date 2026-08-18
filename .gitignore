@@ -6,5 +6,8 @@ dist/
 wheels/
 *.egg-info
 
+# User defined - scratchpad
+.scratchpad/
+
 # Virtual environments
 .venv
