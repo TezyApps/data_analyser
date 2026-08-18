@@ -1,5 +1,6 @@
 
-import sys
+import argparse
+import pandas as pd
 
 class FileReader():
     """
@@ -9,19 +10,22 @@ class FileReader():
         3. Returns a panda DataFrame object.
     """
 
-    def __init__(self):
-        self.__file_path = None
+    #region - Public Methods
 
-    def get_file_path(self):
-        if len(sys.argv) < 2:
-            print(f"""
-            Please input a file name.
-                Usage: dca /root/path/my_file.csv
-                Note:
-                    - Only a single .csv file is supported at the moment as input.
-            """)
-            sys.exit(1)
+    def get_data(self) -> pd.DataFrame:
+        csv_data_file = self.__argparse_get_file_path()
+        data_frame = pd.read_csv(csv_data_file)
+        return data_frame
 
-        file_path = sys.argv[1]
-        self.__file_path = file_path
-        print(f"Loaded the file successfully : {self.__file_path}")
+    #endregion
+
+    #region - Private Methods
+
+    def __argparse_get_file_path(self) -> str:
+          parser = argparse.ArgumentParser(description = "Input a .csv file path")
+          parser.add_argument("file_name", help="The path to the .csv file")
+          args = parser.parse_args()
+          return args.file_name.strip("\n")
+
+    #endregion
+        
