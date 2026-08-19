@@ -1,4 +1,3 @@
-import csv
 import sys
 import pandas as pd
 from . import file_reader as fr, cleanser as cl
@@ -59,21 +58,24 @@ def main() -> None:
     # __execute_options(csv_data)
 
     clo = cl.Cleanser(csv_data)
-    clo.find_nulls()
+    cleansed_data = clo.clean()
 
+    ph('NEW - Data')
+    print(cleansed_data)
+    
     # Next steps:
 
-    # 1. Describe the data
-    #   a. columns -> data types, nulls count, sum of unique values, 
-    #   b. Action Required -> for handling missing data
+    # 1. Describe the data ✅
+    #   ✅ a. columns -> data types, nulls count, sum of unique values, 
+    #   ✅ b. Action Required -> for handling missing data
     
-    # 2. Get a config file for data cleaning:
+    # [MVP - 2] 2. Get a config file for data cleaning:
     #   a. If None, then go with default mapping based on dtypes
     #   b. If provided, then use the config for respective columns.
 
-    # 3. Describe the data (after cleaning > follow step 1)
-    #   a. columns -> data types, sum of unique values, 
-    #   b. Action Required -> for handling missing data
-    #   c. what's changed and it's columns
+    # 3. Describe the data (after cleaning > follow step 1) ✅
+    #   ✅ a. columns -> data types, sum of unique values, 
+    #   ✅ b. Action Required -> for handling missing data
+    #   ✅ c. what's changed and it's columns
 
     # 4. Visualization?
