@@ -1,67 +1,37 @@
-import sys
 import pandas as pd
 from . import file_reader as fr, cleanser as cl
 from .utils import print_header as ph, print_footer as pf
 
-def __next_steps() -> int:
-    print("\n")
-    ph(" Options")
-    print(" 1. Show first 5 rows")
-    print(" 2. Show Columns' data types")
-    print(" 3. Data info")
-    print(" 4. Summary of the data")
-    print(" 5. Exit")
-    pf()
-    
-    option = input("Enter an option : 1 to 4\t=> ")
-    return int(option)
-
-def __execute_options(data: pd.DataFrame):
-
-    __option = 0
-    while __option < 5:
-        __option = __next_steps()
-
-        if __option == 1:
-            ph("Displaying first 5 rows…")
-            print(data.head())
-            pf()
-        elif __option == 2:
-            ph("Displaying column data types…")
-            print(data.columns)
-            pf()
-        elif __option == 3:
-            ph("Displaying data info…")
-            print(data.info())
-            pf()
-        elif __option == 4:
-            ph("Summary of the data")
-            print(data.describe())
-            pf()
-    else:
-        ph("Thank you for using the tool…")
-        print("Exiting the program… Bye!")
-        pf()
-        sys.exit(1)
-
-
-
 def main() -> None:
-    ph("Data Cleanser & Analyser:")
+    ph("🕵️‍♂️ Data Quality Analyser")
 
-    print("Reading the input file…")
+    print(" 👓 Reading the input file…")
     file_reader = fr.FileReader()
-
-    print("\nData is ready for analysis…")
     csv_data = file_reader.get_data()
 
-    # __execute_options(csv_data)
+    cleaner = cl.Cleaner(csv_data)
 
-    clo = cl.Cleanser(csv_data)
-    cleansed_data = clo.clean()
+    print(f" 🔎 Checking for Data quality issues...")
+    columns = cleaner.find_missing_data()
+    print(" 🧹 Data Quality Analysis Complete!")
 
-    ph('NEW - Data')
-    print(cleansed_data)
+    if columns is not None:
+        new_data = cleaner.replace_missing_data(columns)
+        print(" 🪄 Found few missing values and replaced with defaults...\n")
+        ph("🗒️ Summary of the changes")
+        print(cleaner.summary)
+        pf()
+        ph("📊 Some Interesting facts about your data")
+        print(f"\n{new_data.describe()}\n")
+        pf()
+    else:
+        print("\n ✨ Nothing to clean. No missing values across columns.")
+        pf()
+
+    
+    # ph('NEW - Data')
+    # print(cleansed_data)
+    # pf()
     
     # Next steps:
 

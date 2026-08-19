@@ -1,6 +1,6 @@
 
-def __clamped(len: int, min_len: int = 20, max_len: int = 40) -> int:
-    return max(min_len, min(len, max_len))
+def __clamped(length: int, min_len: int = 30, max_len: int = 60) -> int:
+    return max(min_len, min(length, max_len))
 
 def print_header(title: str, sep: str = "="):
     separator = sep * __clamped(len(title))
