@@ -104,6 +104,20 @@ src/data_analyser/
 See [JOURNEY.md](./JOURNEY.md) for the design decisions, trade-offs, and lessons behind
 this implementation.
 
+## TODO
+
+- [ ] Save the cleaned output to a file — either a default location or a user-defined
+      path — alongside the summary.
+- [ ] Configurable fill strategy:
+  - [ ] Inline via `argparse` flags (e.g. `--strategy mean|median|zero|custom`).
+  - [ ] Via a config file, for per-column strategies.
+- [ ] Use [`rich`](https://github.com/Textualize/rich) for pretty console output
+      (tables, colors) instead of raw `print`.
+- [ ] Use [`plotext`](https://github.com/piccolomo/plotext) to render charts inline in
+      the console.
+- [ ] Warn the user when no fill strategy is supplied, stating what default the tool
+      falls back to (`"undefined"` for strings, `0` for numbers).
+
 ## Running tests
 
 ```bash
