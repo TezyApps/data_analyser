@@ -47,6 +47,45 @@ If no missing values are found, the tool reports that there is nothing to clean.
 uv run dca test/student-performance.csv
 ```
 
+Given a CSV with some missing values:
+
+```csv
+name,age,department
+Alice,29,Engineering
+Bob,,Sales
+Carol,34,
+Dan,41,Engineering
+```
+
+```
+==============================
+🕵️‍♂️ Data Quality Analyser
+==============================
+ 👓 Reading the input file…
+ 🔎 Checking for Data quality issues...
+ 🧹 Data Quality Analysis Complete!
+ 🪄 Found few missing values and replaced with defaults...
+
+==============================
+🗒️ Summary of the changes
+==============================
+      columns  missing_entries  after replacing_strategy
+0        name                0      0                  -
+1         age                1      0                  0
+2  department                1      0          undefined
+------------------------------
+
+========================================
+📊 Some Interesting facts about your data
+========================================
+
+             age
+count   4.000000
+mean   26.000000
+...
+------------------------------
+```
+
 ## Project layout
 
 ```
@@ -64,3 +103,27 @@ src/data_analyser/
 
 See [JOURNEY.md](./JOURNEY.md) for the design decisions, trade-offs, and lessons behind
 this implementation.
+
+## TODO
+
+- [ ] Save the cleaned output to a file — either a default location or a user-defined
+      path — alongside the summary.
+- [ ] Configurable fill strategy:
+  - [ ] Inline via `argparse` flags (e.g. `--strategy mean|median|zero|custom`).
+  - [ ] Via a config file, for per-column strategies.
+- [ ] Use [`rich`](https://github.com/Textualize/rich) for pretty console output
+      (tables, colors) instead of raw `print`.
+- [ ] Use [`plotext`](https://github.com/piccolomo/plotext) to render charts inline in
+      the console.
+- [ ] Warn the user when no fill strategy is supplied, stating what default the tool
+      falls back to (`"undefined"` for strings, `0` for numbers).
+
+## Running tests
+
+```bash
+uv run pytest -q
+```
+
+## License
+
+[MIT](./LICENSE)

@@ -1,19 +1,25 @@
 [project]
 name = "data-analyser"
 version = "0.1.0"
-description = "Add your description here"
+description = "CLI tool that loads a CSV into pandas, detects missing values, and auto-fills them with a reported summary"
 readme = "README.md"
+license = "MIT"
 authors = [
     { name = "Tezy Apps", email = "tezyapps@gmail.com" }
 ]
+keywords = ["cli", "pandas", "data-cleaning", "csv"]
 requires-python = ">=3.14"
 dependencies = [
     "pandas>=3.0.5",
 ]
 
+[project.urls]
+Homepage = "https://github.com/TezyApps/data_analyser"
+Repository = "https://github.com/TezyApps/data_analyser"
+
 [project.scripts]
 data-analyser = "data_analyser:main"
-dca="data_analyser:main"
+dca = "data_analyser:main"
 
 [build-system]
 requires = ["uv_build>=0.12.4,<0.13.0"]
