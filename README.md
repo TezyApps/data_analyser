@@ -46,7 +46,7 @@ If no missing values are found, the tool reports that there is nothing to clean.
 ### Example
 
 ```bash
-uv run dca test/student-performance.csv
+uv run dca sample/student-performance.csv
 ```
 
 Given a CSV with some missing values:
@@ -109,16 +109,16 @@ this implementation.
 ## TODO
 
 - [ ] Save the cleaned output to a file — either a default location or a user-defined
-      path — alongside the summary.
+  path — alongside the summary.
 - [ ] Configurable fill strategy:
   - [ ] Inline via `argparse` flags (e.g. `--strategy mean|median|zero|custom`).
   - [ ] Via a config file, for per-column strategies.
 - [ ] Use [`rich`](https://github.com/Textualize/rich) for pretty console output
-      (tables, colors) instead of raw `print`.
+  (tables, colors) instead of raw `print`.
 - [ ] Use [`plotext`](https://github.com/piccolomo/plotext) to render charts inline in
-      the console.
+  the console.
 - [ ] Warn the user when no fill strategy is supplied, stating what default the tool
-      falls back to (`"undefined"` for strings, `0` for numbers).
+  falls back to (`"undefined"` for strings, `0` for numbers).
 
 ## Running tests
 
