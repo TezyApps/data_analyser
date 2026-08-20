@@ -1,5 +1,7 @@
 # data-analyser
 
+[![Test](https://github.com/TezyApps/data_analyser/actions/workflows/test.yml/badge.svg)](https://github.com/TezyApps/data_analyser/actions/workflows/test.yml)
+
 A command-line tool that loads a `.csv` file into a pandas `DataFrame`, detects missing
 (`NaN`) values across columns, automatically fills them with sensible defaults, and
 prints a before/after summary plus a quick statistical overview of the cleaned data.
